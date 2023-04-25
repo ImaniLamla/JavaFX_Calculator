@@ -27,12 +27,12 @@ public class JavaFXCalculator extends Application {
 
 	
 /**
- * Creates a new JavaFX text field where the numbers will be displayed 
+ * Declares a new JavaFX text field where the numbers will be displayed 
  */
 private TextField tfDisplay;    
    
  /**
- * Creates a new JavaFX text where the memory value will be displayed
+ * Declares a new JavaFX text where the memory value will be displayed
  */
 private Text memoryDisplay;	
    
@@ -168,12 +168,17 @@ private char lastOperator = ' ';
       }
    };
 
-   // User pushes '+', '-', '*', '/' or '=' button.
-   // Perform computation on the previous result and the current input number,
-   // based on the previous operator.
-   private void compute() {
-      double inNum = Double.parseDouble(inStr);
+   /**
+    * Performs calculations on the previous result and current input number based on the <br>
+    * last operator used. <br>
+    * Runs when the user pushes either of the math operator buttons except the Square root <br>
+    * button.
+    */
+    private void compute() {
+    	
+      double inNum = Double.parseDouble(inStr);	//Stores converted string into double
       inStr = "0";
+      
       if (lastOperator == ' ') {
          result = inNum;
       } else if (lastOperator == '+') {
@@ -190,14 +195,16 @@ private char lastOperator = ' ';
          // Keep the result for the next operation
       }
       tfDisplay.setText(result + "");
-   }
+   }//end of compute method
 
-   // Setup the UI
+  /**
+   * Sets up the GUI
+   */
    @Override
    public void start(Stage primaryStage) {
 	   
-	   Button[] btns = new Button[24];;          // 24 buttons
-	   String[] btnLabels = {  // Labels of 24 buttons
+	   Button[] btns = new Button[24];		//Creates an array of 24 buttons
+	   String[] btnLabels = {  				//Creates an array of 24 button labels
 	      "7", "8", "9", "+",
 	      "4", "5", "6", "-",
 	      "1", "2", "3", "\u00D7",
@@ -205,57 +212,60 @@ private char lastOperator = ' ';
 	      "C", "^", "\u221A", "=",
 	      "M+", "M-", "MR", "MC"
 	   };
-      // Setup the Display TextField
-      tfDisplay = new TextField("0");
-      tfDisplay.setEditable(false);
-      tfDisplay.setAlignment(Pos.CENTER_RIGHT);
+	   
+      /*Setups the display TextField*/
+      tfDisplay = new TextField("0");			//Instantiates a new JavaFX text field with its display message
+      tfDisplay.setEditable(false);				//Text cannot be edited via the text field
+      tfDisplay.setAlignment(Pos.CENTER_RIGHT); 
       
-      //Set up the text 
-      memoryDisplay = new Text("Memory = 0.0");
+      /*Setups the display Text*/
+      memoryDisplay = new Text("Memory = 0.0"); //Instantiates a new JavaFX text with its display message
 
-      // Setup a GridPane 
+      /*Setup a GridPane*/
       int numCols = 4;
       GridPane paneButton = new GridPane();
-      paneButton.setPadding(new Insets(15, 0, 15, 0));  // top, right, bottom, left
-      paneButton.setVgap(5);  // Vertical gap between nodes
-      paneButton.setHgap(5);  // Horizontal gap between nodes
-      // Setup 4 columns of equal width, fill parent
+      paneButton.setPadding(new Insets(15, 0, 15, 0));  //Top, right, bottom, left
+      paneButton.setVgap(5);  							//Vertical gap between nodes
+      paneButton.setHgap(5);  							//Horizontal gap between nodes
+      
+      /*Setups 4 columns of equal width, fill parent*/
       ColumnConstraints[] columns = new ColumnConstraints[numCols];
+      
       for (int i = 0; i < numCols; ++i) {
          columns[i] = new ColumnConstraints();
-         columns[i].setHgrow(Priority.ALWAYS) ;  // Allow column to grow
-         columns[i].setFillWidth(true);  // Ask nodes to fill space for column
+         columns[i].setHgrow(Priority.ALWAYS) ;  			//Allow column to grow
+         columns[i].setFillWidth(true);  					//Ask nodes to fill space for column
          paneButton.getColumnConstraints().add(columns[i]);
       }
 
-      // Setup 24 Buttons and add to GridPane; and event handler
-      
+      /*Setups 24 Buttons and adds them to the GridPane and event handler*/
       for (int i = 0; i < btns.length; ++i) {
          btns[i] = new Button(btnLabels[i]);
-         btns[i].setOnAction(handler);  // Register event handler
-         btns[i].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);  // full-width
-         paneButton.add(btns[i], i % numCols, i / numCols);  // control, col, row
+         btns[i].setOnAction(handler);  						  //Register event handler
+         btns[i].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);  //Full-width
+         paneButton.add(btns[i], i % numCols, i / numCols);       //Control, column, row
          
-         // to change button colours
+         /*Changes buttons' colors*/
           switch(btnLabels[i]){
-           	case "M+": case "M-": case "MR": case "MC":
+           	case "M+": case "M-": case "MR": case "MC": 		//Set to blue
           		btns[i].setStyle("-fx-color: blue");
           		break;
-          	case "+": case "-": case "\u00D7": case "\u00F7": case "C": case "^": case "\u221A": case "=":
+          		
+          	case "+": case "-": case "\u00D7": case "\u00F7":   //Set to orange
+          	case "C": case "^": case "\u221A": case "=":
           		btns[i].setStyle("-fx-color: orange");
           		break;
           }//end switch 
-          
-      }
+      }//end for loop
 
-      // Setup up the scene graph rooted at a BorderPane (of 5 zones)
+      /*Setups the scene graph rooted at a BorderPane (of 5 zones)*/
       BorderPane root = new BorderPane();
-      root.setPadding(new Insets(15, 15, 15, 15));  // top, right, bottom, left
-      root.setTop(tfDisplay);     // Top zone contains the TextField
-      root.setCenter(paneButton); // Center zone contains the GridPane of Buttons
-      root.setBottom(memoryDisplay); //Bottom zone contains the memory text
+      root.setPadding(new Insets(15, 15, 15, 15));  //Top, right, bottom, left
+      root.setTop(tfDisplay);     					//Top zone contains the TextField
+      root.setCenter(paneButton); 					//Center zone contains the GridPane of Buttons
+      root.setBottom(memoryDisplay); 				//Bottom zone contains the memory text
 
-      // Set up scene and stage
+      /*Setups scene and stage*/
       primaryStage.setScene(new Scene(root, 300, 320));
       primaryStage.setTitle("JavaFX Calculator");
       primaryStage.show();
@@ -263,5 +273,6 @@ private char lastOperator = ' ';
 
    public static void main(String[] args) {
       launch(args);
-   }
-}
+   }//end main
+   
+}//end class
