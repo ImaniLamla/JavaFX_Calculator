@@ -25,7 +25,7 @@ public class JavaFXCalculator extends Application {
    private TextField tfDisplay;    // display text field
    
    private Text memoryDisplay;	//displays a text
-   //private double memory;	//stores memory value
+   private double memory = 0.0;	//stores memory value
    
    // For computation
    private double result = 0.0;      // Result of computation
@@ -33,9 +33,10 @@ public class JavaFXCalculator extends Application {
    // Previous operator: ' '(nothing), '+', '-', '*', '/', '='
    private char lastOperator = ' ';
 
-   // Event handler for all the 16 Buttons
+   // Event handler for all the 24 Buttons
    EventHandler<ActionEvent> handler = evt -> {
       String currentBtnLabel = ((Button)evt.getSource()).getText();
+      double temp = 0.0;
       switch (currentBtnLabel) {
          // Number buttons
          case "0": case "1": case "2": case "3": case "4":
@@ -62,11 +63,11 @@ public class JavaFXCalculator extends Application {
             compute();
             lastOperator = '-';
             break;
-         case "x":
+         case "\u00D7":
             compute();
             lastOperator = '*';
             break;
-         case "/":
+         case "\u00F7":
             compute();
             lastOperator = '/';
             break;
@@ -74,6 +75,16 @@ public class JavaFXCalculator extends Application {
             compute();
             lastOperator = '=';
             break;
+         case "M+": //TODO
+        	 if (lastOperator != '=') {
+        		 temp = Double.parseDouble(inStr);
+        		 memory += temp;
+        		 memoryDisplay.setText("Memory = " + memory);//TEST
+        	 }else {
+        		 memory += result; 
+        		 memoryDisplay.setText("Memory = " + memory);
+        	 }
+        		 
 
          // Clear button
          case "C":
@@ -89,7 +100,7 @@ public class JavaFXCalculator extends Application {
    // Perform computation on the previous result and the current input number,
    // based on the previous operator.
    private void compute() {
-      int inNum = Integer.parseInt(inStr);
+      double inNum = Double.parseDouble(inStr);
       inStr = "0";
       if (lastOperator == ' ') {
          result = inNum;
@@ -143,7 +154,7 @@ public class JavaFXCalculator extends Application {
          paneButton.getColumnConstraints().add(columns[i]);
       }
 
-      // Setup 16 Buttons and add to GridPane; and event handler
+      // Setup 24 Buttons and add to GridPane; and event handler
       
       for (int i = 0; i < btns.length; ++i) {
          btns[i] = new Button(btnLabels[i]);
