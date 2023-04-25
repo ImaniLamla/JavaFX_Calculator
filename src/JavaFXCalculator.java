@@ -111,6 +111,16 @@ public class JavaFXCalculator extends Application {
         	 this.memory = 0.0;
         	 memoryDisplay.setText("Memory = " + this.memory);
         	 break;
+        	 
+         //Backspace 
+         case "\u2190":
+        	 if (this.inStr.length() == 1)
+        		 this.inStr = "0";
+        	 else {
+        		 this.inStr = inStr.substring(0, inStr.length() - 1);
+        		 this.tfDisplay.setText(this.inStr);
+        	 }
+        	 break;
 
          // Clear button
          case "C":
