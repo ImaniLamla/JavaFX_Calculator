@@ -71,6 +71,10 @@ public class JavaFXCalculator extends Application {
             compute();
             lastOperator = '/';
             break;
+         case "^":
+        	 compute();
+        	 lastOperator = '^';
+        	 break;
          case "=":
             compute();
             lastOperator = '=';
@@ -146,6 +150,8 @@ public class JavaFXCalculator extends Application {
          result *= inNum;
       } else if (lastOperator == '/') {
          result /= inNum;
+      } else if (lastOperator == '^') {
+    	 result = Math.pow(this.result, inNum);
       } else if (lastOperator == '=') {
          // Keep the result for the next operation
       }
