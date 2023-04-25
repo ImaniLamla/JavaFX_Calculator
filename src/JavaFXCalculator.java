@@ -71,10 +71,21 @@ public class JavaFXCalculator extends Application {
             compute();
             lastOperator = '/';
             break;
-         case "^":
-        	 compute();
-        	 lastOperator = '^';
-        	 break;
+         case "^":					//power
+        	compute();
+        	lastOperator = '^';
+        	break;
+         case "\u221A":				//square root
+        	if (lastOperator != '=') {
+        		this.result = Double.parseDouble(inStr);
+        	}
+        	this.result = Math.sqrt(this.result);
+        	this.inStr = this.result + "";
+        	
+        	this.tfDisplay.setText(this.inStr);
+        	lastOperator = '=';
+        	break; 
+        	
          case "=":
             compute();
             lastOperator = '=';
@@ -82,47 +93,47 @@ public class JavaFXCalculator extends Application {
             
          //Memory plus   
          case "M+": 
-        	 if (lastOperator != '=') {
+        	if (lastOperator != '=') {
         		 temp = Double.parseDouble(this.inStr);
         		 this.memory += temp;
-        	 }else 
+        	}else 
         		 this.memory += this.result; 
         	 
-        	 memoryDisplay.setText("Memory = " + this.memory);
-        	 break;
+        	memoryDisplay.setText("Memory = " + this.memory);
+        	break;
         	 
          //Memory minus	 
          case "M-":
-        	 if (lastOperator != '=') {
+        	if (lastOperator != '=') {
         		 temp = Double.parseDouble(this.inStr);
         		 this.memory -= temp;
-        	 }else 
+        	}else 
         		 this.memory -= this.result; 
         	 
-        	 memoryDisplay.setText("Memory = " + this.memory);
-        	 break;
+        	memoryDisplay.setText("Memory = " + this.memory);
+        	break;
          
          //Memory recall
          case "MR":
-        	 this.inStr = String.valueOf(this.memory);
-        	 tfDisplay.setText(this.memory + "");
-        	 break;
+        	this.inStr = String.valueOf(this.memory);
+        	tfDisplay.setText(this.memory + "");
+        	break;
          
          //Memory Clear
          case "MC":
-        	 this.memory = 0.0;
-        	 memoryDisplay.setText("Memory = " + this.memory);
-        	 break;
+        	this.memory = 0.0;
+        	memoryDisplay.setText("Memory = " + this.memory);
+        	break;
         	 
          //Backspace 
          case "\u2190":
-        	 if (this.inStr.length() == 1)
+        	if (this.inStr.length() == 1)
         		 this.inStr = "0";
-        	 else 
+        	else 
         		 this.inStr = inStr.substring(0, inStr.length() - 1);
         	 
-        	 this.tfDisplay.setText(this.inStr);
-        	 break;
+        	this.tfDisplay.setText(this.inStr);
+        	break;
 
          // Clear button
          case "C":
