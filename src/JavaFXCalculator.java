@@ -81,11 +81,10 @@ public class JavaFXCalculator extends Application {
         	 if (lastOperator != '=') {
         		 temp = Double.parseDouble(this.inStr);
         		 this.memory += temp;
-        		 memoryDisplay.setText("Memory = " + this.memory);
-        	 }else {
+        	 }else 
         		 this.memory += this.result; 
-        		 memoryDisplay.setText("Memory = " + this.memory);
-        	 }
+        	 
+        	 memoryDisplay.setText("Memory = " + this.memory);
         	 break;
         	 
          //Memory minus	 
@@ -93,11 +92,10 @@ public class JavaFXCalculator extends Application {
         	 if (lastOperator != '=') {
         		 temp = Double.parseDouble(this.inStr);
         		 this.memory -= temp;
-        		 memoryDisplay.setText("Memory = " + this.memory);
-        	 }else {
+        	 }else 
         		 this.memory -= this.result; 
-        		 memoryDisplay.setText("Memory = " + this.memory);
-        	 }
+        	 
+        	 memoryDisplay.setText("Memory = " + this.memory);
         	 break;
          
          //Memory recall
@@ -116,10 +114,10 @@ public class JavaFXCalculator extends Application {
          case "\u2190":
         	 if (this.inStr.length() == 1)
         		 this.inStr = "0";
-        	 else {
+        	 else 
         		 this.inStr = inStr.substring(0, inStr.length() - 1);
-        		 this.tfDisplay.setText(this.inStr);
-        	 }
+        	 
+        	 this.tfDisplay.setText(this.inStr);
         	 break;
 
          // Clear button
