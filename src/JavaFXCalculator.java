@@ -16,12 +16,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 public class JavaFXCalculator extends Application {
-   private TextField tfDisplay;    // display textfield
+   private TextField tfDisplay;    // display text field
+   
+   private Text memoryDisplay;	//displays a text
+   //private double memory;	//stores memory value
    
    // For computation
    private double result = 0.0;      // Result of computation
@@ -35,7 +39,7 @@ public class JavaFXCalculator extends Application {
       switch (currentBtnLabel) {
          // Number buttons
          case "0": case "1": case "2": case "3": case "4":
-         case "5": case "6": case "7": case "8": case "9":
+         case "5": case "6": case "7": case "8": case "9": case ".":
             if (inStr.equals("0")) {
                inStr = currentBtnLabel;  // no leading zero
             } else {
@@ -120,10 +124,12 @@ public class JavaFXCalculator extends Application {
       tfDisplay = new TextField("0");
       tfDisplay.setEditable(false);
       tfDisplay.setAlignment(Pos.CENTER_RIGHT);
+      
+      //Set up the text 
+      memoryDisplay = new Text("Memory = 0.0");
 
-      // Setup a GridPane for 4x4 Buttons
+      // Setup a GridPane 
       int numCols = 4;
-      //int numRows = 4;
       GridPane paneButton = new GridPane();
       paneButton.setPadding(new Insets(15, 0, 15, 0));  // top, right, bottom, left
       paneButton.setVgap(5);  // Vertical gap between nodes
@@ -162,10 +168,10 @@ public class JavaFXCalculator extends Application {
       root.setPadding(new Insets(15, 15, 15, 15));  // top, right, bottom, left
       root.setTop(tfDisplay);     // Top zone contains the TextField
       root.setCenter(paneButton); // Center zone contains the GridPane of Buttons
-      //root.setBottom(memoryText); //Bottom zone contains the memory...
+      root.setBottom(memoryDisplay); //Bottom zone contains the memory text
 
       // Set up scene and stage
-      primaryStage.setScene(new Scene(root, 300, 300));
+      primaryStage.setScene(new Scene(root, 300, 320));
       primaryStage.setTitle("JavaFX Calculator");
       primaryStage.show();
    }
