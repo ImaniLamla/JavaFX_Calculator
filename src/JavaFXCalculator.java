@@ -181,20 +181,20 @@ private char lastOperator = ' ';
       
       if (lastOperator == ' ') {
          result = inNum;
-      } else if (lastOperator == '+') {
+      } else if (lastOperator == '+') {			//Performs addition calculation
          result += inNum;
-      } else if (lastOperator == '-') {
+      } else if (lastOperator == '-') {			//Performs subtraction calculation
          result -= inNum;
-      } else if (lastOperator == '*') {
+      } else if (lastOperator == '*') {			//Performs multiplication calculation
          result *= inNum;
-      } else if (lastOperator == '/') {
+      } else if (lastOperator == '/') {			//Performs division calculation
          result /= inNum;
-      } else if (lastOperator == '^') {
-    	 result = Math.pow(this.result, inNum);
+      } else if (lastOperator == '^') {			//Performs power calculation
+    	 result = Math.pow(this.result, inNum); //Uses the Math.pow function	
       } else if (lastOperator == '=') {
          // Keep the result for the next operation
       }
-      tfDisplay.setText(result + "");
+      tfDisplay.setText(result + "");			//Displays the result in the text field
    }//end of compute method
 
   /**
