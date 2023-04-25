@@ -75,15 +75,26 @@ public class JavaFXCalculator extends Application {
             compute();
             lastOperator = '=';
             break;
-         case "M+": //TODO
+         case "M+": 
         	 if (lastOperator != '=') {
         		 temp = Double.parseDouble(inStr);
         		 memory += temp;
-        		 memoryDisplay.setText("Memory = " + memory);//TEST
+        		 memoryDisplay.setText("Memory = " + memory);
         	 }else {
         		 memory += result; 
         		 memoryDisplay.setText("Memory = " + memory);
         	 }
+        	 break;
+         case "M-"://TODO
+        	 if (lastOperator != '=') {
+        		 temp = Double.parseDouble(inStr);
+        		 memory -= temp;
+        		 memoryDisplay.setText("Memory = " + memory);
+        	 }else {
+        		 memory -= result; 
+        		 memoryDisplay.setText("Memory = " + memory);
+        	 }
+        	 break;
         		 
 
          // Clear button
