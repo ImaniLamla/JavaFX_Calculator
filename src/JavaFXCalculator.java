@@ -1,15 +1,14 @@
 /**
  * @author Imani Lamla 
  * GitHub URL: https://github.com/ImaniLamla/JavaFX_Calculator.git
- * JavaFXCalculator
+ * JavaFXCalculator <br>
+ * A simple calculator 
  *
  */
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-//import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-//import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -21,17 +20,41 @@ import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
+/**
+ * The class that contains all the methods necessary for the calculator to work.
+ */
 public class JavaFXCalculator extends Application {
-   private TextField tfDisplay;    // display text field
+
+	
+/**
+ * Creates a new JavaFX text field where the numbers will be displayed 
+ */
+private TextField tfDisplay;    
    
-   private Text memoryDisplay;	//displays a text
-   private double memory = 0.0;	//stores memory value
+ /**
+ * Creates a new JavaFX text where the memory value will be displayed
+ */
+private Text memoryDisplay;	
    
-   // For computation
-   private double result = 0.0;      // Result of computation
-   private String inStr = "0";  // Input number as String
-   // Previous operator: ' '(nothing), '+', '-', '*', '/', '='
-   private char lastOperator = ' ';
+ /**
+ * Stores the current memory value
+ */
+private double memory = 0.0;	
+   
+ /**
+ * Stores the result of the calculations
+ */
+private double result = 0.0;      
+   
+ /**
+ * Stores the user's input as a string
+ */
+private String inStr = "0";  
+   
+ /**
+ * Stores the last operator used by the user
+ */
+private char lastOperator = ' ';
 
    // Event handler for all the 24 Buttons
    EventHandler<ActionEvent> handler = evt -> {
