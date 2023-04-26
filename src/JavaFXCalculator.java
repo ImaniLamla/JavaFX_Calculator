@@ -56,41 +56,47 @@ private String inStr = "0";
  */
 private char lastOperator = ' ';
 
-   // Event handler for all the 24 Buttons
+  /**
+   * Event handler for all the 24 Buttons
+   */
    EventHandler<ActionEvent> handler = evt -> {
       String currentBtnLabel = ((Button)evt.getSource()).getText();
+      
       double temp = 0.0;
+      
       switch (currentBtnLabel) {
-         // Number buttons
+      
+         /*Number buttons*/
          case "0": case "1": case "2": case "3": case "4":
          case "5": case "6": case "7": case "8": case "9": case ".":
             if (inStr.equals("0")) {
-               inStr = currentBtnLabel;  // no leading zero
+               inStr = currentBtnLabel;  	//No leading zero
             } else {
-               inStr += currentBtnLabel; // append input digit
+               inStr += currentBtnLabel; 	//Appends input digit
             }
-            tfDisplay.setText(inStr);
-            // Clear buffer if last operator is '='
-            if (lastOperator == '=') {
+            tfDisplay.setText(inStr);		//Displays inStr in the text field
+            
+            
+            if (lastOperator == '=') {		//Clears buffer if last operator is '='
                result = 0;
                lastOperator = ' ';
             }
             break;
 
-         // Operator buttons: '+', '-', 'x', '/' and '='
-         case "+":
+         /*Operator buttons: '+', '-', 'x', '/' and '='*/
+         case "+":					//addition
             compute();
             lastOperator = '+';
             break;
-         case "-":
+         case "-":					//subtraction
             compute();
             lastOperator = '-';
             break;
-         case "\u00D7":
+         case "\u00D7":				//multiplication
             compute();
             lastOperator = '*';
             break;
-         case "\u00F7":
+         case "\u00F7":				//division
             compute();
             lastOperator = '/';
             break;
@@ -102,31 +108,29 @@ private char lastOperator = ' ';
         	if (lastOperator != '=') {
         		this.result = Double.parseDouble(inStr);
         	}
-        	this.result = Math.sqrt(this.result);
+        	this.result = Math.sqrt(this.result);		//Uses the Math.sqrt method to calculate the square root
         	this.inStr = this.result + "";
         	
-        	this.tfDisplay.setText(this.inStr);
+        	this.tfDisplay.setText(this.inStr);			//Displays the result in the text field
         	lastOperator = '=';
         	break; 
         	
-         case "=":
+         case "=":					//equals
             compute();
             lastOperator = '=';
             break;
-            
-         //Memory plus   
-         case "M+": 
-        	if (lastOperator != '=') {
+              
+         case "M+": 				//Memory plus 
+        	if (lastOperator != '=') {							//Test to see if the last operator is not =
         		 temp = Double.parseDouble(this.inStr);
-        		 this.memory += temp;
+        		 this.memory += temp;							//Appends temp to the current memory value
         	}else 
-        		 this.memory += this.result; 
+        		 this.memory += this.result; 					//Appends the result of the calculation to the current memory value
         	 
-        	memoryDisplay.setText("Memory = " + this.memory);
+        	memoryDisplay.setText("Memory = " + this.memory);	//Updates the JavaFX text control with the new memory value
         	break;
         	 
-         //Memory minus	 
-         case "M-":
+         case "M-":					//Memory minus				Similar to M+ but it subtracts from the memory value
         	if (lastOperator != '=') {
         		 temp = Double.parseDouble(this.inStr);
         		 this.memory -= temp;
@@ -136,30 +140,26 @@ private char lastOperator = ' ';
         	memoryDisplay.setText("Memory = " + this.memory);
         	break;
          
-         //Memory recall
-         case "MR":
-        	this.inStr = String.valueOf(this.memory);
-        	tfDisplay.setText(this.memory + "");
+         case "MR":					//Memory recall
+        	this.inStr = String.valueOf(this.memory);				//Converts double to a string
+        	tfDisplay.setText(this.memory + "");					//Updates the text control
         	break;
          
-         //Memory Clear
-         case "MC":
-        	this.memory = 0.0;
+         case "MC":					//Memory Clear
+        	this.memory = 0.0;										//Resets the memory
         	memoryDisplay.setText("Memory = " + this.memory);
         	break;
         	 
-         //Backspace 
-         case "\u2190":
+         case "\u2190":				//Backspace 
         	if (this.inStr.length() == 1)
-        		 this.inStr = "0";
+        		 this.inStr = "0";										//Returns 0 if the string length is 1
         	else 
-        		 this.inStr = inStr.substring(0, inStr.length() - 1);
+        		 this.inStr = inStr.substring(0, inStr.length() - 1);	//Returns the same string but removes the farthest char on the right
         	 
         	this.tfDisplay.setText(this.inStr);
         	break;
 
-         // Clear button
-         case "C":
+         case "C":					//Clear: resets all values 
             result = 0;
             inStr = "0";
             lastOperator = ' ';
