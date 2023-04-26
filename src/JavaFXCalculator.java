@@ -2,8 +2,7 @@
  * @author Imani Lamla 
  * GitHub URL: https://github.com/ImaniLamla/JavaFX_Calculator.git
  * JavaFXCalculator <br>
- * A simple calculator 
- *
+ * A simple calculator using JavaFX
  */
 import javafx.application.Application;
 import javafx.event.ActionEvent;
