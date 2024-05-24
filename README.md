@@ -17,5 +17,8 @@ The full set of 24 Buttons consist of: <br>
 <li>An equals button</li>
 </ul> <br>
 
+### School Course:
+Programming Fundamentals 2
+
 ### Completed: <br>
 26 April 2023
